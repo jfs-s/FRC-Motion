@@ -10,17 +10,15 @@ FRC-Motion introduces three targeted improvements to the MoMask framework for te
 
 ## Overview
 
-Text-driven 3D human motion generation aims to synthesize realistic, semantically aligned human motion sequences from natural language descriptions. Most state-of-the-art masked generative models are built on a Residual Vector Quantization (RVQ-VAE) motion codebook whose representation quality directly bounds downstream generation quality.
+Text-driven 3D human motion generation maps natural-language descriptions to motion sequences. In RVQ-based methods, the RVQ-VAE reconstructs motion and provides hierarchical discrete tokens for the subsequent generation model. FRC-Motion modifies RVQ-VAE training and passes base-token confidence between the two generation stages through three components:
 
-FRC-Motion enhances this pipeline along three axes:
+1. **Adaptive Multi-Scale DWT Loss** — During RVQ-VAE training, a three-level `db4` discrete wavelet transform decomposes each motion feature along the temporal axis. The loss compares the wavelet coefficients of reconstructed and ground-truth motions. It uses the activity statistics of the ground-truth coefficients to assign a weight to each frequency band for each motion sequence.
 
-1. **Adaptive-Weight Multi-Scale DWT Frequency-Domain Loss** — A differentiable three-level `db4` wavelet decomposition applied along the time axis during RVQ-VAE training. Reconstruction weights are adaptively allocated according to the per-band energy of the ground-truth motion, explicitly decoupling low-frequency backbone semantics from high-frequency detail and preventing the network from smoothing away transient motion cues.
+2. **MCR² Regularization Mechanism** — This RVQ-specific mechanism adapts the coding-rate formulation of MCR² to residual features. It increases the coding rate of the concatenated residual features and the normalized effective rank within each residual layer. These terms encourage broader use of the aggregate feature space and more balanced use of feature dimensions within individual layers.
 
-2. **MCR² Residual Subspace Orthogonality Constraint** — A Maximal Coding Rate Reduction (MCR²) regularizer applied to the gradient-bearing residual latents. An inter-layer orthogonality term expands the overall representation space while an intra-layer expansion term (bounded effective rank) preserves per-layer diversity, driving different residual layers to occupy mutually separated subspaces and reducing inter-layer redundancy.
+3. **Cross-Stage Confidence Propagation** — The M-Transformer generates base-layer tokens and provides a confidence value for each position from its output probabilities. A linear projection passes these values to the R-Transformer as additional inputs during residual-token prediction, alongside the base-token identities.
 
-3. **M-Transformer → R-Transformer Confidence Propagation** — The per-position maximum-softmax confidence produced by the base-layer M-Transformer is projected and injected into the R-Transformer input, establishing a cross-stage information channel that lets the residual stage treat low-confidence base-layer positions with greater caution.
-
-The first two act on the **RVQ-VAE training stage** and add **no inference cost**; the third adds only a single confidence computation at inference.
+The DWT loss and MCR² regularization mechanism are used only during RVQ-VAE training and require no wavelet decomposition or coding-rate computation at inference. Confidence propagation adds confidence extraction and a linear projection to the generation process.
 
 ---
 
