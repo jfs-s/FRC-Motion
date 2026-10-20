@@ -1,8 +1,8 @@
-# FOC-Motion
+# FRC-Motion
 
 **Text-Driven Human Motion Generation via Frequency-Orthogonal Representation and Confidence Guidance**
 
-FOC-Motion introduces three targeted improvements to the MoMask framework for text-driven 3D human motion generation, addressing three previously overlooked aspects: frequency-domain perception, inter-layer representation constraints, and cross-stage information transfer.
+FRC-Motion introduces three targeted improvements to the MoMask framework for text-driven 3D human motion generation, addressing three previously overlooked aspects: frequency-domain perception, inter-layer representation constraints, and cross-stage information transfer.
 
 > **Note:** The code and pretrained weights will be released here upon acceptance of the paper. This repository currently serves as a placeholder describing the method and planned release.
 
@@ -12,7 +12,7 @@ FOC-Motion introduces three targeted improvements to the MoMask framework for te
 
 Text-driven 3D human motion generation aims to synthesize realistic, semantically aligned human motion sequences from natural language descriptions. Most state-of-the-art masked generative models are built on a Residual Vector Quantization (RVQ-VAE) motion codebook whose representation quality directly bounds downstream generation quality.
 
-FOC-Motion enhances this pipeline along three axes:
+FRC-Motion enhances this pipeline along three axes:
 
 1. **Adaptive-Weight Multi-Scale DWT Frequency-Domain Loss** — A differentiable three-level `db4` wavelet decomposition applied along the time axis during RVQ-VAE training. Reconstruction weights are adaptively allocated according to the per-band energy of the ground-truth motion, explicitly decoupling low-frequency backbone semantics from high-frequency detail and preventing the network from smoothing away transient motion cues.
 
@@ -54,7 +54,7 @@ Internal-mechanism verification (bootstrap RateReduction and per-layer EffRank) 
 ## Planned Repository Structure
 
 ```
-FOC-Motion/
+FRC-Motion/
 ├── configs/            # training / evaluation configs
 ├── models/             # RVQ-VAE, M-Transformer, R-Transformer
 ├── losses/             # DWT frequency-domain loss, MCR² regularizer
