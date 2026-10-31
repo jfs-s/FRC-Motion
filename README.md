@@ -69,7 +69,7 @@ FRC-Motion/
 - **HumanML3D** — 14,616 motion sequences, 44,970 text descriptions, 263-dim pose features, 20 FPS.
 - **KIT-ML** — 3,911 motion sequences, 251-dim pose features.
 
-Both are processed following the T2M preprocessing pipeline and split 0.8 / 0.15 / 0.05 (train / test / val). Please obtain the datasets from their original sources and follow their respective licenses.
+The HumanML3D dataset used in this study is publicly available at https://github.com/EricGuo5513/HumanML3D, and the KIT-ML dataset is publicly available at https://drive.google.com/drive/folders/1D3bf2G2o4Hv-Ale26YW18r1Wrh7oIAwK.
 
 ---
 
