@@ -27,7 +27,7 @@ The DWT loss and MCR² regularization mechanism are used only during RVQ-VAE tra
 ```
 Input Motion ──► RVQ-VAE Encoder ──► 6-level Residual Vector Quantization ──► Decoder ──► Reconstructed Motion
                                          │
-                    Training losses: Reconstruction + Embedding + [MCR² Regularization Mechanism] + [Adaptive Multi-Scale DWT Loss]
+                    Training: Reconstruction + Embedding + [MCR² Regularization Mechanism] + [Adaptive Multi-Scale DWT Loss]
 
 Text ──► CLIP ──► M-Transformer (base-layer tokens) ──[Cross-Stage Confidence Propagation]──► R-Transformer (residual-layer tokens)
 ```
