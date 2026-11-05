@@ -29,7 +29,7 @@ Input Motion ──► RVQ-VAE Encoder ──► 6-level Residual Vector Quantiz
                                          │
                     Training losses: Reconstruction + Embedding + [MCR² Regularization Mechanism] + [Adaptive Multi-Scale DWT Loss]
 
-Text ──► CLIP ──► M-Transformer (base-layer tokens) ──[per-position confidence]──► R-Transformer (residual-layer tokens)
+Text ──► CLIP ──► M-Transformer (base-layer tokens) ──[Cross-Stage Confidence Propagation]──► R-Transformer (residual-layer tokens)
 ```
 
 ---
